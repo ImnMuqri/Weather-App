@@ -1,4 +1,4 @@
-echo "# Weather App
+# Weather App
 
 This is a Weather App built with **Vue 3**, **TypeScript**, **Vuex**, **Vue Router**, and **Tailwind CSS**.
 
