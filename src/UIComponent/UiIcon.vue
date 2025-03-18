@@ -8,10 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from "vue";
+import { computed } from "vue";
+import type { PropType } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
 import {
+  IconDefinition,
   faUser,
   faMagnifyingGlass,
   faPenToSquare,
@@ -22,7 +25,6 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Add only faUser to FontAwesome library
 library.add(
   faUser,
   faMagnifyingGlass,

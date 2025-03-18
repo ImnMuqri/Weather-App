@@ -15,10 +15,10 @@ const routes = [
     component: UserProfile,
   },
   {
-    path: "/detail/:weatherKey?", // Optional param (use `?` if it's not required)
+    path: "/detail/:weatherKey?",
     name: "Detail",
     component: DetailView,
-    props: true, // Enables passing params as props
+    props: true,
   },
 ];
 

@@ -22,7 +22,6 @@
       class="p-2 absolute top-full left-0 w-full bg-white border border-gray-300 rounded-sm z-10 text-black text-left text-sm"
       :class="{ 'mt-1': suggestions.length || loading }">
       <li v-if="loading" class="p-2 text-gray-500">Loading...</li>
-
       <li
         v-for="(place, index) in suggestions"
         :key="index"
@@ -45,50 +44,37 @@ const store = useStore();
 const isFocused = ref(false);
 const loading = ref(false);
 const suggestions = ref<any[]>([]);
-const API_KEY = "35aac734db0bc3ce87c156b98185d57e";
 
 const fetchCitySuggestions = async (query: string) => {
-  if (!query) {
-    suggestions.value = [];
-    return;
-  }
+  if (!query) return (suggestions.value = []);
 
   loading.value = true;
-
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
-    );
-    const data = await response.json();
-
-    if (!data.length) {
-      suggestions.value = [{ display_name: "No results found" }];
-      return;
-    }
-
-    suggestions.value = data.map((place: any) => ({
-      display_name: `${place.name}, ${place.country}`,
-      city: place.name,
-      country_code: place.country,
-    }));
-  } catch (error) {
-    console.error("Error fetching city suggestions:", error);
+    const data = await (
+      await fetch(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      )
+    ).json();
+    suggestions.value = data.length
+      ? data.map((place: any) => ({
+          display_name: `${place.name}, ${place.country}`,
+          city: place.name,
+          country_code: place.country,
+        }))
+      : [{ display_name: "No results found" }];
+  } catch {
     suggestions.value = [{ display_name: "Error fetching data" }];
   } finally {
     loading.value = false;
   }
 };
 
-const handleInput = (event: Event) => {
-  const query = (event.target as HTMLInputElement).value;
-  fetchCitySuggestions(query);
-};
-
+const handleInput = (event: Event) =>
+  fetchCitySuggestions((event.target as HTMLInputElement).value);
 const selectCity = (place: any) => {
-  const selectedLocation = `${place.city},${place.country_code}`;
-
-  store.dispatch("updateCity", selectedLocation);
-
+  store.dispatch("updateCity", `${place.city},${place.country_code}`);
   suggestions.value = [];
   isFocused.value = false;
   emit("blur");
@@ -98,11 +84,9 @@ const handleFocus = () => {
   isFocused.value = true;
   emit("focus");
 };
-
-const handleBlur = () => {
+const handleBlur = () =>
   setTimeout(() => {
     isFocused.value = false;
     emit("blur");
   }, 200);
-};
 </script>
