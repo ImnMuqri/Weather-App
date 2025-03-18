@@ -21,7 +21,7 @@ npm install
 
 Create a `.env` file in the root of the project and add your API key:
 ``
-VUE_APP_API_KEY=your-weather-api-key
+VITE_API_KEY=your-weather-api-key
 ``
 
 ### 4. Run the development server:
