@@ -6,29 +6,29 @@ This is a Weather App built with **Vue 3**, **TypeScript**, **Vuex**, **Vue Rout
 
 ### 1. Clone the repository:
 
-\`\`\`bash
+``
 git clone <your-repository-url>
 cd <project-directory>
-\`\`\`
+``
 
 ### 2. Install dependencies:
 
-\`\`\`bash
+``
 npm install
-\`\`\`
+``
 
 ### 3. Set up environment variables:
 
 Create a `.env` file in the root of the project and add your API key:
-\`\`\`bash
-VUE_APP_API_KEY=your-weather-api-key
-\`\`\`
+``
+VITE_API_KEY=your-weather-api-key
+``
 
 ### 4. Run the development server:
 
-\`\`\`bash
+``
 npm run dev
-\`\`\`
+``
 
 This will start the development server, and you can view your app by navigating to \`http://localhost:3000\`.
 
