@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../pages/HomeView.vue";
-import UserProfile from "../pages/UserProfile.vue";
+import HomeView from "../pages/homeView.vue";
+import UserProfile from "../pages/userProfile.vue";
 import DetailView from "../pages/DetailView.vue";
 
 const routes = [

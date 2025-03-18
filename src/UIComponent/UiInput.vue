@@ -12,7 +12,7 @@
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
-      :disabled="disabled"
+      :disabled="disabled ? 'true' : undefined"
       :class="[
         'block w-full bg-transparent focus:outline-none text-[12px]',
         disabled

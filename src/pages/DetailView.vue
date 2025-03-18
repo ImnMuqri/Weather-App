@@ -1,17 +1,13 @@
 <template>
   <div class="text-black">
     <div>
-      <!-- Current Weather -->
-      <div class="bg-blue-600 p-12 shadow-md grid grid-cols-1 gap-3 text-white">
+      <div class="bg-blue-600 p-12 shadow-md grid gap-3 text-white">
         <div class="flex justify-between items-center">
           <UiIcon
             :icon="['fas', 'chevron-left']"
             size="md"
-            class="cursor-pointer"
             @click="$router.push('/')" />
-          <span class="text- font-semibold">{{
-            weatherData.current.name
-          }}</span>
+          <span class="font-semibold">{{ weatherData.current.name }}</span>
           <UiIcon
             :icon="['fas', 'trash-can']"
             size="md"
@@ -25,15 +21,14 @@
         <p class="text-lg font-bold capitalize">
           {{ weatherData.current.weather[0]?.description || "No data" }}
         </p>
-        <span class="flex justify-center gap-2 items-center"
-          >Last Update
-          <p class="uppercase">{{ formattedLastUpdate }}</p></span
-        >
+        <span class="flex justify-center gap-2 items-center">
+          Last Update
+          <p class="uppercase">{{ formattedLastUpdate }}</p>
+        </span>
       </div>
 
-      <!-- Hourly Forecast -->
       <div class="bg-white px-1">
-        <div class="m-4 grid grid-cols-1 gap-4">
+        <div class="m-4 grid gap-4">
           <h2 class="text-xl text-left font-semibold">Hourly Forecast</h2>
           <div class="flex overflow-scroll space-x-2 no-scrollbar">
             <div
@@ -49,14 +44,13 @@
           </div>
         </div>
 
-        <!-- Weekly Forecast -->
-        <div class="m-4 grid grid-cols-1 gap-4">
+        <div class="m-4 grid gap-4">
           <h2 class="text-xl text-left font-semibold">Weekly Forecast</h2>
-          <div class="grid grid-cols-1 gap-4">
+          <div class="grid gap-4">
             <div
               v-for="(day, index) in weatherData.weekly"
               :key="index"
-              class="p-4 px-4 bg-blue-100 rounded-xl flex justify-between items-center">
+              class="p-4 bg-blue-100 rounded-xl flex justify-between items-center">
               <div class="flex gap-4">
                 <UiIcon
                   :icon="['fas', 'cloud-sun-rain']"
@@ -68,10 +62,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <p class="text-lg font-semibold">{{ day.temp.day }}°C</p>
-                <UiIcon
-                  :icon="['fas', 'chevron-right']"
-                  class="text-black"
-                  size="sm" />
+                <UiIcon :icon="['fas', 'chevron-right']" size="sm" />
               </div>
             </div>
           </div>
@@ -83,10 +74,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import UiIcon from "../UIComponent/UiIcon.vue";
-const props = defineProps<{ weatherKey?: string }>();
 
-// Fake data for weather
 const weatherData = ref({
   current: {
     name: "Kuala Lumpur",
@@ -134,7 +122,6 @@ const weatherData = ref({
   ],
 });
 
-// Get the current date and time (Now)
 const currentDate = new Date();
 const formattedNow = currentDate.toLocaleDateString("en-US", {
   weekday: "long",
@@ -143,39 +130,34 @@ const formattedNow = currentDate.toLocaleDateString("en-US", {
   day: "numeric",
 });
 
-const lastUpdateDate = new Date(currentDate.getTime() - 2 * 60 * 60 * 1000); // 2 hours ago
+const lastUpdateDate = new Date(currentDate.getTime() - 2 * 60 * 60 * 1000);
 const formattedLastUpdate = lastUpdateDate.toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit",
-  hour12: true, // Ensures 12-hour format with AM/PM
+  hour12: true,
 });
 
-const formatTime = (timestamp: number) => {
-  const time = new Date(timestamp * 1000).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true, // 12-hour format
-  });
+const formatTime = (timestamp: number) =>
+  new Date(timestamp * 1000)
+    .toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(/^0/, "");
 
-  // Remove leading zero from hour
-  return time.replace(/^0/, "");
-};
-
-const formatDate = (timestamp: number) => {
-  return new Date(timestamp * 1000).toLocaleDateString(undefined, {
-    weekday: "long",
-  });
-};
+const formatDate = (timestamp: number) =>
+  new Date(timestamp * 1000).toLocaleDateString(undefined, { weekday: "long" });
 </script>
 
 <style scoped>
 .no-scrollbar {
   overflow: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 </style>

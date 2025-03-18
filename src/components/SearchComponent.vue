@@ -2,7 +2,7 @@
   <div class="grid gap-2 w-full h-full relative">
     <div
       class="w-full bg-white rounded-sm text-black flex items-center gap-2 border border-gray-300 focus-within:border-blue-500 px-2 py-1">
-      <UIIcon
+      <UiIcon
         :icon="['fas', 'magnifying-glass']"
         size="sm"
         class="text-gray-500" />
@@ -36,7 +36,6 @@
 <script setup lang="ts">
 import { ref, defineEmits } from "vue";
 import { useStore } from "vuex";
-import UIIcon from "../UIComponent/UiIcon.vue";
 
 const emit = defineEmits(["focus", "blur"]);
 const store = useStore();

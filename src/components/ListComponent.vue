@@ -74,7 +74,7 @@ interface WeatherData {
   temperature: string;
   high: string;
   low: string;
-  time: string;
+  time: string | null;
 }
 const store = useStore();
 const selectedCities = computed(() => store.getters.getCities || []);
@@ -161,6 +161,7 @@ async function fetchWeatherForLocation(lat: number, lon: number) {
     temperature: `${Math.round(weatherData.main.temp)}°C`,
     high: `${Math.round(weatherData.main.temp_max)}°C`,
     low: `${Math.round(weatherData.main.temp_min)}°C`,
+    time: null,
   };
 }
 

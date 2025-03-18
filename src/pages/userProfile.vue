@@ -33,16 +33,21 @@
     </div>
     <div class="grid grid-cols-1 gap-4">
       <UiInput
+        v-model="fullName"
         label="Full name"
         type="text"
         :disabled="!Edit"
         placeholder="Enter your full name" />
+
       <UiInput
+        v-model="email"
         label="Email"
         type="text"
         :disabled="!Edit"
         placeholder="Enter your email address" />
+
       <UiInput
+        v-model="phoneNumber"
         label="Phone Number"
         type="text"
         :disabled="!Edit"
@@ -66,10 +71,10 @@
 </template>
 
 <script setup lang="ts">
-import UiInput from "../UIComponent/UiInput.vue";
-import UiIcon from "../UIComponent/UiIcon.vue";
 import { ref } from "vue";
-
+const fullName = ref("");
+const email = ref("");
+const phoneNumber = ref("");
 const Edit = ref(false);
 </script>
 

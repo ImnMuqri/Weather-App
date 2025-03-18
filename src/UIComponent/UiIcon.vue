@@ -25,6 +25,7 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 
+// Adding icons to the library
 library.add(
   faUser,
   faMagnifyingGlass,
@@ -38,7 +39,7 @@ library.add(
 
 const props = defineProps({
   icon: {
-    type: [String, Array] as PropType<string | IconDefinition>,
+    type: [String, Object] as PropType<string[] | IconDefinition>, // Allow both string and IconDefinition
     required: true,
   },
   size: {
